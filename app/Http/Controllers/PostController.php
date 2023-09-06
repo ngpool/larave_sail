@@ -12,7 +12,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // $posts=Post::all();
+        $posts=Post::orderBy('created_at','desc')->get();
+        $user=auth()->user();
+        return view('post.index',compact('posts','user'));
     }
 
     /**
@@ -38,6 +41,13 @@ class PostController extends Controller
         $post->title=$inputs['title'];
         $post->body=$inputs['body'];
         $post->user_id=auth()->user()->id;
+
+        if(request('image')){
+            $original=request()->file('image')->getClientOriginalName();
+            $name=date('Ymd_His').'_'.$original;
+            request()->file('image')->move('storage/image',$name);
+            $post->image=$name;
+        }
         $post->save();
         return redirect()->route('post.create')->with('message', '投稿を作成しました');
     }
