@@ -22,7 +22,7 @@
                         <div>
                             (画像ファイル:{{$post->image}})
                         </div>
-                        <img src="{{asset('storage/app/public/image/'.$post->image)}} "class="mx-auto" style="height:300px;">
+                        <img src="{{asset('storage/image/'.$post->image)}} "class="mx-auto" style="height:300px;">
                         <div class="text-sm font-semibold flex flex-row-reverse">
                             <p> {{ $post->user->name }} • {{$post->created_at->diffForHumans()}}</p>
                         </div>
