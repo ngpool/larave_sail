@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //お問い合わせフォーム
+    Route::get('/contact', [ContactController::class, 'index'])->name('index');
+    Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('confirm');
+    Route::post('/contact/thanks', [ContactController::class, 'send'])->name('send');
 });
 
 Route::resource('post', PostController::class);
