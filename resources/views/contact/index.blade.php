@@ -52,6 +52,12 @@
                             </div>
 
                             <div class="form-group row mb-0">
+                                <div class="w-full flex flex-col">
+                                    <label for="image" class="font-semibold leading-none mt-4">画像（1MBまで） </label>
+                                    <div>
+                                    <input id="image" type="file" name="image">
+                                    </div>
+                                </div>
                                 <div class="col-md-9 offset-md-3">
                                     {{-- <button type="submit" class="btn btn-primary">
                                         お問い合わせ内容の確認へ

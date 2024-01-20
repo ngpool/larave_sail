@@ -40,12 +40,12 @@ class ContactSendmail extends Mailable
     // /**
     //  * Get the message envelope.
     //  */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: 'Contact Sendmail',
-    //     );
-    // }
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Contact Sendmail',
+        );
+    }
 
     // /**
     //  * Get the message content definition.
