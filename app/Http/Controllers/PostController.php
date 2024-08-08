@@ -4,18 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
+    protected $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $posts=Post::all();
         $posts=Post::orderBy('created_at','desc')->get();
         $user=auth()->user();
-        return view('post.index',compact('posts','user'));
+        //プルダウン
+        $order = $request->input('order');
+        $sortedPosts = $this->postService->getAllSorted($order);
+
+        return view('post.index',compact('posts','user','sortedPosts'));
     }
 
     /**
@@ -82,5 +93,14 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+    public function handleSort(Request $request){
+        $order = $request->input('order');
+
+        // $order を使用してデータをソートまたは処理する
+        $sortedPosts = $this->postService->getAllSorted($order);
+        dd($sortedPosts);
+
+        return view('posts.index', ['sortedPosts' => $sortedPosts]);
     }
 }

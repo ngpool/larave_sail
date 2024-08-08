@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         お問い合わせフォーム
                     </x-nav-link>
+                    <x-nav-link :href="route('todo')" :active="request()->routeIs('todo')">
+                        TODOリスト
+                    </x-nav-link>
                 </div>
             </div>
 

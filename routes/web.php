@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TodoListController;
+use App\Http\Controllers\SortController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('index');
     Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('confirm');
     Route::post('/contact/thanks', [ContactController::class, 'send'])->name('send');
+    //TODOリスト
+    Route::get('/todo', [TodoListController::class, 'todo'])->name('todo');
+    Route::resource('post', PostController::class);
+    Route::post('/sort', [PostController::class, 'handleSort']);
+    require __DIR__.'/auth.php';
+
 });
 
-Route::resource('post', PostController::class);
-require __DIR__.'/auth.php';
+

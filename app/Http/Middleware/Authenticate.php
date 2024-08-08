@@ -14,4 +14,18 @@ class Authenticate extends Middleware
     {
         return $request->expectsJson() ? null : route('login');
     }
+
+    /**
+     * 認証されていない場合の処理
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  array  $guards
+     * @return void
+     */
+    protected function authenticate($request, array $guards)
+    {
+        if (!$this->auth->guard($guards)->check()) {
+            return redirect()->route('login'); // ログインページにリダイレクト
+        }
+    }
 }
